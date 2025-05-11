@@ -1,19 +1,40 @@
 import { useContext, useState } from 'react';
 import { BookContext } from '../contexts/BookContext';
 import { useNavigate } from 'react-router';
+import { useAuth } from "../contexts/AuthContext";
+import { addBook } from "../hooks/useBooks";
 
 export default function New() {
-  const { addBook } = useContext(BookContext);
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ title: '', author: '', pages: '', cover: '', price: '', desc: '' });
+  const [form, setForm] = useState({
+    title: "",
+    author: "",
+    pages: "",
+    cover: "",
+    price: "",
+    desc: "",
+  });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addBook(form);
+    
+    if (!user) {
+      alert("Musisz być zalogowany, aby dodać książkę.");
+      return;
+    }
+
+    await addBook({
+      ...form,
+      pages: parseInt(form.pages),
+      price: parseFloat(form.price),
+      owner: user.uid,
+    });
+
     navigate('/');
   };
 

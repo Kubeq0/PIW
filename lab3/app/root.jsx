@@ -14,7 +14,9 @@ import {
 import stylesheet from "./app.css?url";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { useNavigate } from 'react-router';
 import { BookProvider } from './contexts/BookContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 export const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -32,7 +34,7 @@ export const links = () => [
 
 export function Layout({ children }) {
   return (
-    <html lang="en">
+    <html lang="pl">
       <head>
         <meta charSet="utf-8" />
         <title>BookPack</title>
@@ -41,13 +43,15 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body className="min-h-screen bg-gray-50">
-        <BookProvider>
-          <Header />
-          <main className="container mx-auto p-4">
-            {children}
-          </main>
-          <Footer />
-        </BookProvider>
+        <AuthProvider> 
+          <BookProvider>
+            <Header />
+            <main className="container mx-auto p-4">
+              {children}
+            </main>
+            <Footer />
+          </BookProvider>
+        </AuthProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
