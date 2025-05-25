@@ -11,7 +11,7 @@ export default function BookItem({ book }) {
   const isOwner = user?.uid === book.owner;
 
   return (
-    <div className="border p-3 rounded-lg shadow-sm hover:shadow-md bg-white flex flex-col gap-1 transition text-sm h-full">
+    <div className="book border p-3 rounded-lg shadow-sm hover:shadow-md bg-white flex flex-col gap-1 transition text-sm h-full">
       <h3 className="text-lg font-semibold">{book.title}</h3>
       <p><strong>Autor:</strong> {book.author}</p>
       <p><strong>Stron:</strong> {book.pages}</p>

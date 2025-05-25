@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 
 export default function Filters({ filters, onChange }) {
   return (
-    <section className="bg-white p-6 rounded-lg shadow mb-8">
+    <section className="filters bg-white p-6 rounded-lg shadow mb-8">
       <h2 className="text-2xl font-bold mb-4">Wyszukiwanie pozycji</h2>
       <form className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <input type="text" name="title" placeholder="Tytuł" value={filters.title} onChange={onChange} className="border p-2 rounded" />
